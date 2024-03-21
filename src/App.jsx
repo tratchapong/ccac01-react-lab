@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useMemo } from "react";
 import Todos from "./Todos";
 
 function App() {
@@ -12,6 +12,20 @@ function App() {
     setTodos([...todos, new Date().toISOString()])
   }
 
+  const expensiveCalculation = (num) => {
+    console.log("Calculating...");
+    for (let i = 0; i < 1000_000_000; i++) {
+      num += 1;
+    }
+    return num;
+  };
+
+  const calculation = useMemo( ()=>{
+    return expensiveCalculation(count)
+  }, [count])
+
+//  const calculation = expensiveCalculation(count)
+
   return (
     <>
       <button className="border p-3" onClick={addTodo}>Add todo</button>
@@ -20,6 +34,8 @@ function App() {
       <div>
         Count: {count}
         <button className='border p-2' onClick={increment}>+</button>
+        <h2>Expensive Calculation</h2>
+        {calculation}
       </div>
     </>
   )
