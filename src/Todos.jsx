@@ -1,6 +1,6 @@
 import {memo} from "react";
 
-function Todos({ todos }) {
+function Todos({ todos, addTodo }) {
   console.log("child render");
   return (
     <>
