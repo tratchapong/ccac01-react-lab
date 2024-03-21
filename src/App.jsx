@@ -1,10 +1,28 @@
+import { useState } from "react";
+import Todos from "./Todos";
+
 function App() {
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState(["todo 1", "todo 2", "todo 3"]);
+
+  const increment = () => {
+    setCount((c) => c + 1);
+  };
+  const addTodo = () => {
+    setTodos([...todos, new Date().toISOString()])
+  }
 
   return (
     <>
-      <h1 className="text-2xl border text-center p-2">Vite + React</h1>
+      <button className="border p-3" onClick={addTodo}>Add todo</button>
+      <Todos todos={todos} />
+      <hr />
+      <div>
+        Count: {count}
+        <button className='border p-2' onClick={increment}>+</button>
+      </div>
     </>
   )
-}
+} //re-render
 
 export default App
